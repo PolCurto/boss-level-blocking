@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstPersonMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // Components
     [SerializeField] private Rigidbody rb;
@@ -11,6 +11,11 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCd;
+
+    [Header("Combat parameters")]
+    [SerializeField] private Transform attackRef;
+    [SerializeField] private float attackRadius;
+    [SerializeField] private int attackDamage;
 
     private Vector3 input;
     private Vector3 direction;
@@ -33,7 +38,13 @@ public class FirstPersonMovement : MonoBehaviour
     void GatherInput()
     {
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
         if (Input.GetKeyDown(KeyCode.LeftShift)) desiredDash = true;
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Hit();
+        }
     }
 
     void HandleDash()
@@ -77,5 +88,18 @@ public class FirstPersonMovement : MonoBehaviour
     private void ResetDash()
     {
         canDash = true;
+    }
+
+    private void Hit()
+    {
+        Collider[] colliders = Physics.OverlapSphere(attackRef.position, attackRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.TryGetComponent<LifeComponent>(out LifeComponent life))
+            {
+                life.GetHit(1);
+            }
+        }
     }
 }
