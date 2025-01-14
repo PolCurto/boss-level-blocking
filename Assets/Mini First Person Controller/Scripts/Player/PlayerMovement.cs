@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private float speed = 5;
 
@@ -13,7 +13,7 @@ public class FirstPersonMovement : MonoBehaviour
     void Awake()
     {
         // Get the rigidbody on this.
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -38,6 +38,6 @@ public class FirstPersonMovement : MonoBehaviour
 
         Vector3 valueToMove = direction * speed;
 
-        rigidbody.MovePosition(transform.position + valueToMove * Time.deltaTime);
+        rb.MovePosition(transform.position + valueToMove * Time.deltaTime);
     }
 }
