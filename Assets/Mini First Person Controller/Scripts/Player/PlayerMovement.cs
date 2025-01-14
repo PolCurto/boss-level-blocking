@@ -34,6 +34,10 @@ public class FirstPersonMovement : MonoBehaviour
 
     void Move()
     {
-        rigidbody.MovePosition(transform.position + speed * Time.deltaTime * transform.forward);
+        Vector3 direction = Quaternion.Euler(0, 45.0f, 0) * input;
+
+        Vector3 valueToMove = direction * speed;
+
+        rigidbody.MovePosition(transform.position + valueToMove * Time.deltaTime);
     }
 }
