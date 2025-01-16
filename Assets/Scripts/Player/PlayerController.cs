@@ -3,69 +3,111 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Components
+    #region Global Variables
+    [Header("Components")]
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform attackRef;
 
     [Header("Movement parameters")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCd;
+    [SerializeField] private float gravity;
+    [SerializeField] private float groundCheckDistance;
 
     [Header("Combat parameters")]
-    [SerializeField] private Transform attackRef;
     [SerializeField] private float attackRadius;
     [SerializeField] private int attackDamage;
 
     private Vector3 input;
     private Vector3 direction;
+
+    private bool isGrounded;
+
+    private float currentGravity;
     private bool desiredDash;
     private bool isDashing;
     private float dashTimer;
     private bool canDash = true;
+    #endregion
+
+    #region Unity methods
+    private void Awake()
+    {
+        currentGravity = gravity;
+    }
 
     private void Update()
     {
         GatherInput();
+        HandleDash();
+        EnvironmentCheck();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        HandleDash();
         Move();
     }
 
-    void GatherInput()
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(groundCheck.position, Vector3.down * groundCheckDistance);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackRef.position, attackRadius);
+    }
+    #endregion
+
+    private void GatherInput()
     {
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) desiredDash = true;
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Hit();
         }
     }
 
-    void HandleDash()
+    private void HandleDash()
     {
         if (desiredDash && canDash)
         {
+            currentGravity = 0;
             isDashing = true;
             dashTimer = dashDuration;
             desiredDash = false;
             canDash = false;
+
+            if (direction == Vector3.zero) direction = Vector3.forward;
         }
     }
 
-    void Move()
+    private void EnvironmentCheck()
     {
-        Vector3 valueToMove;
+        if (Physics.Raycast(groundCheck.position, Vector3.down, groundCheckDistance, LayerMask.GetMask("Ground")))
+        {
+            isGrounded = true;
+        } 
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
+    private void Move()
+    {
+        Vector3 desiredVelocity;
 
         if (isDashing)
         {
             //Dashing
-            valueToMove = direction * dashSpeed;
+            desiredVelocity = dashSpeed * Time.deltaTime * direction;
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0) StopDashing();
         }
@@ -73,14 +115,26 @@ public class PlayerController : MonoBehaviour
         {
             // Moving
             direction = Quaternion.Euler(0, 45.0f, 0) * input;
-            valueToMove = direction * movementSpeed;
+            desiredVelocity = movementSpeed * Time.deltaTime * direction;
         }
-       
-        rb.MovePosition(transform.position + valueToMove * Time.deltaTime);
+
+        if (isGrounded)
+        {
+            desiredVelocity.y = 0;
+        } 
+        else
+        {
+            desiredVelocity.y -= currentGravity * Time.deltaTime;
+        }
+
+        if (direction != Vector3.zero) transform.forward = direction;
+
+        rb.velocity = desiredVelocity * 100;
     }
 
-    void StopDashing()
+    private void StopDashing()
     {
+        currentGravity = gravity;
         isDashing = false;
         Invoke(nameof(ResetDash), dashCd);
     }
@@ -92,12 +146,15 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        Collider[] colliders = Physics.OverlapSphere(attackRef.position, attackRadius);
+        Debug.Log("Hit");
+        Collider[] colliders = Physics.OverlapSphere(attackRef.position, attackRadius, LayerMask.GetMask("Enemy"));
 
         foreach (Collider collider in colliders)
         {
+            Debug.Log("Collider hit");
             if (collider.TryGetComponent<LifeComponent>(out LifeComponent life))
             {
+                Debug.Log("Collider has life");
                 life.GetHit(1);
             }
         }
