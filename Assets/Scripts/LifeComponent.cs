@@ -21,7 +21,7 @@ public class LifeComponent : MonoBehaviour
         if (currentLife <= 0) Die();
     }
 
-    virtual protected void Die()
+    private void Die()
     {
         isDead = true;
     }
