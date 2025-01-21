@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
+        secondArena.transform.position -= Vector3.up * 10;
     }
 
     public void OnBossSecondPhase()

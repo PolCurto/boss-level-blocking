@@ -521,7 +521,6 @@ GameObject:
   - component: {fileID: 751219116}
   - component: {fileID: 751219115}
   - component: {fileID: 751219114}
-  - component: {fileID: 751219117}
   - component: {fileID: 751219118}
   m_Layer: 8
   m_Name: Plane
@@ -550,7 +549,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7350b65a6431f604a8496c39db1ac9c5, type: 2}
+  - {fileID: 2100000, guid: 78fc8bbe147ca694e91701d61c84230e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -595,28 +594,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &751219117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751219112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d3ef1a5bbfb4e0a910fbbe5830b1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterMode: 0
-  disablePixelLights: 1
-  textureSize: 256
-  clipPlaneOffset: 0.07
-  reflectLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  refractLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!65 &751219118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1060,7 +1037,7 @@ Transform:
   m_GameObject: {fileID: 1441237482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1207,17 +1184,17 @@ PrefabInstance:
     - target: {fileID: 5238820401998598406, guid: f2e0b7ae4dae8cf44955bccd3512b213,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 140.97
+      value: -51.86
       objectReference: {fileID: 0}
     - target: {fileID: 5238820401998598406, guid: f2e0b7ae4dae8cf44955bccd3512b213,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.8
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 5238820401998598406, guid: f2e0b7ae4dae8cf44955bccd3512b213,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.64
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 5238820401998598406, guid: f2e0b7ae4dae8cf44955bccd3512b213,
         type: 3}
