@@ -60,6 +60,14 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackRef.position, attackRadius);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Water"))
+        {
+            ResetPosition();
+        }
+    }
     #endregion
 
     private void GatherInput()
@@ -159,4 +167,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void ResetPosition()
+    {
+        rb.MovePosition(new Vector3(-50, 0, 0));
+    }
+
 }
