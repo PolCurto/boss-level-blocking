@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     private Vector3 zoomOutPosition;
     private Vector3 initialPosition;
 
-    private Coroutine zoomCoroutine; 
+    private Coroutine zoomCoroutine;
     
 
     Material obstacleMaterial;
