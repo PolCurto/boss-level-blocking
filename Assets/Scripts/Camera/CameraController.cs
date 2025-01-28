@@ -6,13 +6,27 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Transform camera;
+    [SerializeField] private Camera camera;
+
+    [SerializeField] private float zoomOutSize = 10f; 
+    [SerializeField] private float zoomInSize = 5f;  
+    [SerializeField] private float zoomDuration = 1f; 
+
+    private Vector3 zoomOutPosition;
+    private Vector3 initialPosition;
+
+    private Coroutine zoomCoroutine; 
+    
 
     Material obstacleMaterial;
     RaycastHit hit;
 
     bool aux = false;
 
+    private void Start()
+    {
+       
+    }
 
     void LateUpdate()
     {
@@ -26,12 +40,12 @@ public class CameraController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(camera.position, player.position);
+        Gizmos.DrawLine(camera.transform.position, player.position);
     }
 
     private void CheckObstacles()
     {
-        if (Physics.Raycast(camera.position, player.position - camera.position, out hit, float.MaxValue, LayerMask.GetMask("Obstacle")))
+        if (Physics.Raycast(camera.transform.position, player.position - camera.transform.position, out hit, float.MaxValue, LayerMask.GetMask("Obstacle")))
         {
             if (obstacleMaterial == null)
             {
@@ -82,5 +96,37 @@ public class CameraController : MonoBehaviour
         obstacleMaterial.color = color;
         if (!enter) obstacleMaterial = null;
         yield return null;
+    }
+
+    public void CameraZoomOut()
+    {
+        zoomInSize = camera.orthographicSize;
+        zoomOutSize = camera.orthographicSize + zoomOutSize;
+        if (zoomCoroutine != null) StopCoroutine(zoomCoroutine);
+        zoomCoroutine = StartCoroutine(SmoothZoom(zoomOutSize));
+    }
+
+    public void CameraZoomIn()
+    {
+        // Inicia la transición al tamaño ortográfico de zoom in.
+        if (zoomCoroutine != null) StopCoroutine(zoomCoroutine);
+        zoomCoroutine = StartCoroutine(SmoothZoom(zoomInSize));
+    }
+
+    private IEnumerator SmoothZoom(float targetSize)
+    {
+        float startSize = camera.orthographicSize;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < zoomDuration)
+        {
+            // Interpola suavemente entre el tamaño actual y el tamaño objetivo.
+            camera.orthographicSize = Mathf.Lerp(startSize, targetSize, elapsedTime / zoomDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Asegúrate de llegar exactamente al tamaño objetivo.
+        camera.orthographicSize = targetSize;
     }
 }
