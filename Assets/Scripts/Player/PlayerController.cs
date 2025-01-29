@@ -166,6 +166,18 @@ public class PlayerController : MonoBehaviour
                 life.GetHit(1);
             }
         }
+
+        Collider[] breakables = Physics.OverlapSphere(attackRef.position, attackRadius, LayerMask.GetMask("Obstacle"));
+
+        foreach (Collider collider in breakables)
+        {
+            Debug.Log("breakables hit");
+            if (collider.TryGetComponent<LifeComponent>(out LifeComponent life))
+            {
+                Debug.Log("breakables has life");
+                life.GetHit(1);
+            }
+        }
     }
 
     private void ResetPosition()
