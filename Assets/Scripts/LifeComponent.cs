@@ -7,7 +7,7 @@ public class LifeComponent : MonoBehaviour
 {
     [SerializeField] private int maxLife;
 
-    private int currentLife;
+    protected int currentLife;
     private bool isDead;
 
     private void Awake()
@@ -15,7 +15,7 @@ public class LifeComponent : MonoBehaviour
         currentLife = maxLife;
     }
 
-    public void GetHit(int damage)
+    virtual public void GetHit(int damage)
     {
         currentLife -= damage;
         if (currentLife <= 0) Die();
