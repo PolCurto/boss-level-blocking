@@ -154,15 +154,15 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         Collider[] colliders = Physics.OverlapSphere(attackRef.position, attackRadius, LayerMask.GetMask("Enemy"));
 
         foreach (Collider collider in colliders)
         {
-            Debug.Log("Collider hit");
+            //Debug.Log("Collider hit");
             if (collider.TryGetComponent<LifeComponent>(out LifeComponent life))
             {
-                Debug.Log("Collider has life");
+                //Debug.Log("Collider has life");
                 life.GetHit(1);
             }
         }

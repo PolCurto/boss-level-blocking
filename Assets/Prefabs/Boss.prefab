@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1265556702803582713}
   m_Layer: 7
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5937021550012969373}
   m_Layer: 7
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4553975256544811457}
+  - {fileID: 3194142552549044589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5491899837731433597
@@ -170,11 +171,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   rb: {fileID: 5937021550012969373}
+  rockSpawner: {fileID: 8351340424537450004}
+  hugeRock: {fileID: 2659790766570462632, guid: a38a9947d66224248b740f829e712916,
+    type: 3}
+  runeScript: {fileID: 0}
   speed: 7
   minPlayerDistance: 4
   dashCd: 4
   dashSpeed: 20
   dashDuration: 0.3
+  isSecondEncounter: 1
+  isDashing: 0
 --- !u!54 &5937021550012969373
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -202,3 +209,103 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!1001 &192750276092286064
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3313277029841111189}
+    m_Modifications:
+    - target: {fileID: 1051217045643644977, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: width
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051217045643644977, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: height
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051217045643644977, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: rockSpawnRate
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163093752907100772, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_Name
+      value: RockSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163093752907100772, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99f2451a791d9614c8efe6219ae4fe1f, type: 3}
+--- !u!4 &3194142552549044589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3386450599195436317, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 192750276092286064}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8351340424537450004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8163093752907100772, guid: 99f2451a791d9614c8efe6219ae4fe1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 192750276092286064}
+  m_PrefabAsset: {fileID: 0}
