@@ -102,20 +102,20 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 5
-    - _DepthFallof: 6
+    - _Depth: 3
+    - _DepthFallof: 8
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamAmount: 2
+    - _FoamAmount: 4
     - _FoamCutout: 0.15
-    - _FoamDepth: 8
-    - _FoamFalloff: 7
+    - _FoamDepth: 4
+    - _FoamFalloff: 10
     - _FoamSpeed: 0
     - _FoamTiling: 2
-    - _FoamWidth: 0.5
+    - _FoamWidth: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

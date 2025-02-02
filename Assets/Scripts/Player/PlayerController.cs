@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCd;
     [SerializeField] private float gravity;
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private Vector3 spawnPos;
 
     [Header("Combat parameters")]
     [SerializeField] private float attackRadius;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         currentGravity = gravity;
+        //spawnPos = new Vector3(-50, 0, 0);
     }
 
     private void Update()
@@ -182,7 +184,12 @@ public class PlayerController : MonoBehaviour
 
     private void ResetPosition()
     {
-        rb.MovePosition(new Vector3(-50, 0, 0));
+        rb.MovePosition(spawnPos);
+    }
+
+    public void SetSpawnPos(Vector3 newPos)
+    {
+        spawnPos = newPos;
     }
 
 }
