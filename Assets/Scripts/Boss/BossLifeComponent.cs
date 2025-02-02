@@ -20,4 +20,9 @@ public class BossLifeComponent : LifeComponent
     {
         bossScript.Die();
     }
+
+    public void Heal()
+    {
+        currentLife = maxLife;
+    }
 }

@@ -9,7 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject firstArena;
     [SerializeField] private GameObject secondArena;
 
+    [SerializeField] private CameraShaker shaker;
+    [SerializeField] private RockSpawner[] rockSpawners;
+
     [SerializeField] private float stageTransitionTime;
+    [SerializeField] private PlayerController playerController;
 
     private void Awake()
     {
@@ -20,6 +24,22 @@ public class GameManager : MonoBehaviour
     public void OnBossSecondPhase()
     {
         StartCoroutine(ModifyStage());
+        shaker.StartShaking();
+        for (int i = 0; i < rockSpawners.Length; i++)
+        {
+            rockSpawners[i].gameObject.SetActive(true);
+        }
+
+        playerController.SetSpawnPos(new Vector3(60, 1.5f, 2));
+    }
+
+    public void StopShake()
+    {
+        shaker.StopShaking();
+        for (int i = 0; i < rockSpawners.Length; i++)
+        {
+            rockSpawners[i].gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator ModifyStage()

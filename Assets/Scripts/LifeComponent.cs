@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LifeComponent : MonoBehaviour
 {
-    [SerializeField] private int maxLife;
+    [SerializeField] protected int maxLife;
 
     protected int currentLife;
     private bool isDead;

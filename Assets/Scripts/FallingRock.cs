@@ -11,13 +11,11 @@ public class FallingRock : MonoBehaviour
     [SerializeField] private float fallingSpeed;
 
     private bool isPlayingParticles;
-
-
-    // TODO Blob shadow that grows bigger as it falls down
+    private float timer;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
             // TODO: Despawn and particle effect
             meshRenderer.enabled = false;
@@ -25,13 +23,12 @@ public class FallingRock : MonoBehaviour
             particles.Play();
             isPlayingParticles = true;
         }
-        else if (collision.gameObject.CompareTag("Player"))
-        {
-            // TODO: Damage player (and maybe particles)
-        }
         else if (collision.gameObject.CompareTag("Water"))
         {
-            // TODO: Water splash particles
+            meshRenderer.enabled = false;
+            particles.gameObject.SetActive(true);
+            particles.Play();
+            isPlayingParticles = true;
         }
     }
 
@@ -45,6 +42,13 @@ public class FallingRock : MonoBehaviour
         if (isPlayingParticles && particles.isStopped)
         {
             gameObject.SetActive(false);
+        }
+
+        timer += Time.deltaTime;
+
+        if (timer >= 5)
+        {
+            Destroy(gameObject);
         }
     }
 }

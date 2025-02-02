@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void GatherInput()
     {
-        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) desiredDash = true;
 

@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BossScript : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject rockSpawner;
     [SerializeField] private GameObject hugeRock;
     [SerializeField] private RuneScript runeScript;
+    [SerializeField] private BossLifeComponent bossLife;
 
+    [Header("Parameters")]
     [SerializeField] private float speed;
     [SerializeField] private float minPlayerDistance;
     [SerializeField] private float dashCd;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
+    [SerializeField] private Vector3 secondPhasePosition;
 
     [SerializeField] private bool isSecondEncounter;
 
@@ -103,7 +107,17 @@ public class BossScript : MonoBehaviour
         GameManager.Instance.OnBossSecondPhase();
 
         targetPlayer = false;
-        transform.position = new Vector3(180, 2, -17.5f);
+        transform.position = secondPhasePosition;
+
+        if (!isSecondEncounter)
+        {
+            isSecondEncounter = true;
+            bossLife.Heal();
+        } 
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void AttackPlayer(bool attack)
@@ -114,6 +128,7 @@ public class BossScript : MonoBehaviour
 
     public void HalfLife()
     {
+        Debug.Log("Boss half life");
         isAngry = true;
 
         if (isSecondEncounter)
@@ -134,15 +149,15 @@ public class BossScript : MonoBehaviour
 
         rockSpawner.SetActive(false);
 
-        Instantiate(hugeRock, transform.position + new Vector3(5, 10, 1), Quaternion.identity);
+        Instantiate(hugeRock, transform.position + new Vector3(-10, 30, 5), Quaternion.Euler(-90, 0, 225));
 
         yield return new WaitForSeconds(0.5f);
 
-        Instantiate(hugeRock, transform.position + new Vector3(1, 10, 8), Quaternion.identity);
+        Instantiate(hugeRock, transform.position + new Vector3(10, 30, 0), Quaternion.Euler(-90, 0, 225));
 
         yield return new WaitForSeconds(0.5f);
 
-        Instantiate(hugeRock, transform.position + new Vector3(10, 10, 5), Quaternion.identity);
+        Instantiate(hugeRock, transform.position + new Vector3(0, 30, 10), Quaternion.Euler(-90, 0, 225));
 
         yield return new WaitForSeconds(1.0f);
         targetPlayer = true;
