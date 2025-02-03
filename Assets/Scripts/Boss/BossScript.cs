@@ -34,9 +34,6 @@ public class BossScript : MonoBehaviour
         {
             FollowPlayer();
         }
-
-        Debug.Log("Target player: " + targetPlayer);
-        Debug.Log("Is dashing: " + isDashing);
     }
 
     private void FollowPlayer()
@@ -162,5 +159,12 @@ public class BossScript : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         targetPlayer = true;
 
+    }
+
+    public void OnPlayerFall()
+    {
+        targetPlayer = false;
+        isAngry = false;
+        bossLife.Heal();
     }
 }

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform attackRef;
+    [SerializeField] private BossScript boss;
 
     [Header("Movement parameters")]
     [SerializeField] private float movementSpeed;
@@ -185,6 +186,7 @@ public class PlayerController : MonoBehaviour
     private void ResetPosition()
     {
         rb.MovePosition(spawnPos);
+        boss.OnPlayerFall();
     }
 
     public void SetSpawnPos(Vector3 newPos)
