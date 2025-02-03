@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 direction;
 
     private bool isGrounded;
+    private bool isDisabled;
 
     private float currentGravity;
     private bool desiredDash;
@@ -75,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
     private void GatherInput()
     {
+        if (isDisabled) return;
+
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) desiredDash = true;
@@ -192,6 +196,20 @@ public class PlayerController : MonoBehaviour
     public void SetSpawnPos(Vector3 newPos)
     {
         spawnPos = newPos;
+    }
+
+    public void DisablePlayer()
+    {
+        isDisabled = true;
+        rb.velocity = Vector3.zero;
+        input = Vector3.zero;
+        direction = Vector3.zero;
+    }
+
+    public void EnablePlayer()
+    {
+        isDisabled = false;
+        Debug.Log("Enable player");
     }
 
 }
