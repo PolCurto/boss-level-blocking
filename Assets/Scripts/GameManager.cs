@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
 
-    [SerializeField] private GameObject firstArena;
+   // [SerializeField] private GameObject firstArena;
     [SerializeField] private GameObject secondArena;
 
     [SerializeField] private CameraShaker shaker;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(5);
 
-        StartCoroutine(MoveArena(firstArena.transform, firstArena.transform.position, firstArena.transform.position - Vector3.up * 2.5f, 4));
+        //StartCoroutine(MoveArena(firstArena.transform, firstArena.transform.position, firstArena.transform.position - Vector3.up * 2.5f, 4));
     }
 
     private IEnumerator MoveArena(Transform target, Vector3 startPos, Vector3 endPos, float duration)

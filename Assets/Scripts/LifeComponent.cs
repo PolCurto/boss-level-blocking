@@ -8,7 +8,7 @@ public class LifeComponent : MonoBehaviour
     [SerializeField] protected int maxLife;
 
     protected int currentLife;
-    private bool isDead;
+    public bool isDead;
 
     private void Awake()
     {

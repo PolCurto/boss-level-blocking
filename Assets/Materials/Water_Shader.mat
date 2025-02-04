@@ -96,7 +96,7 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _CausticCutout: 0.01
-    - _CausticTiling: 25
+    - _CausticTiling: 2
     - _CausticsSpeed: 0.005
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -131,8 +131,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _WaveIntensity: 0.05
-    - _WaveSpeed: 1
+    - _WaveIntensity: 0.25
+    - _WaveSpeed: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

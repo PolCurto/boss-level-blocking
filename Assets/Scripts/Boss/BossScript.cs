@@ -30,6 +30,7 @@ public class BossScript : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Target player: " + targetPlayer);
         if (targetPlayer)
         {
             FollowPlayer();
@@ -91,10 +92,17 @@ public class BossScript : MonoBehaviour
 
     private void StopStun()
     {
-        Debug.Log("Stop stun");
-        timer = 0;
-        targetPlayer = true;
-        isDashing = false;
+        if (bossLife.isDead)
+        {
+            bossLife.isDead = false;
+        } 
+        else
+        {
+            Debug.Log("Stop stun");
+            timer = 0;
+            targetPlayer = true;
+            isDashing = false;
+        } 
     }
 
 
@@ -105,6 +113,7 @@ public class BossScript : MonoBehaviour
 
         targetPlayer = false;
         transform.position = secondPhasePosition;
+        rb.velocity = Vector3.zero;
 
         if (!isSecondEncounter)
         {
@@ -119,7 +128,7 @@ public class BossScript : MonoBehaviour
 
     public void AttackPlayer(bool attack)
     {
-        //Debug.Log("Attack player");
+        Debug.Log("Attack player");
         targetPlayer = attack;
     }
 
